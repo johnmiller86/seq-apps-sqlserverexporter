@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  
+	  <TargetFramework>netstandard2.0</TargetFramework>
+	  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+	  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	  <TreatSpecificWarningsAsErrors />
+	  <Authors>John D. Miller</Authors>
+	  <VersionPrefix>1.0.0</VersionPrefix>
+	  <Description>Exports events from Seq directly into a MSSQL database.</Description>
+	  <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+	  <Copyright>Copyright © John Miller</Copyright>
+	  <RepositoryUrl>https://github.com/johnmiller86/seq-app-sqlserverexporter.git</RepositoryUrl>
+	  <RepositoryType>git</RepositoryType>
+	  <PackageTags>seq-app</PackageTags>
+	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
+	  <PackageProjectUrl>https://github.com/johnmiller86/seq-app-sqlserverexporter</PackageProjectUrl>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <PackageIcon>SQL.png</PackageIcon>
+	  <ApplicationIcon>SQL.ico</ApplicationIcon>
+	  <PackageId>Seq.Apps.SQLServerExporter</PackageId>
+	  <Product>Seq.Apps.SQLServerExporter</Product>
+	  <PackageReleaseNotes>Initial Package Creation</PackageReleaseNotes>
+	  <AssemblyName>Seq.Apps.SQLServerExporter</AssemblyName>
+	  <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<OutputPath>bin\Release\</OutputPath>
+		<DocumentationFile></DocumentationFile>
+	</PropertyGroup>
+
+  <ItemGroup>
+	  <None Include="../LICENSE" Link="LICENSE" Pack="true" PackagePath="" />
+	  <None Include="$(OutDir)/**/*.dll" Exclude="$(OutDir)/$(MSBuildProjectName).dll;$(OutDir)/Seq.Apps.dll;$(OutDir)/Serilog.dll" Pack="true" PackagePath="lib/$(TargetFramework)" />
+	  <None Include="SQL.png">
+		  <Pack>True</Pack>
+		  <PackagePath></PackagePath>
+	  </None>
+  </ItemGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Seq.Apps" Version="2021.4.0" />
+	  <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+</Project>
