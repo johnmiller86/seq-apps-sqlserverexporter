@@ -7,7 +7,7 @@
 	  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	  <TreatSpecificWarningsAsErrors />
 	  <Authors>John D. Miller</Authors>
-	  <VersionPrefix>1.0.1</VersionPrefix>
+	  <VersionPrefix>1.0.2</VersionPrefix>
 	  <Description>Exports events from Seq directly into a MSSQL database.</Description>
 	  <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 	  <Copyright>Copyright © John Miller</Copyright>
@@ -21,7 +21,7 @@
 	  <ApplicationIcon>SQL.ico</ApplicationIcon>
 	  <PackageId>Seq.Apps.SQLServerExporter</PackageId>
 	  <Product>Seq.Apps.SQLServerExporter</Product>
-	  <PackageReleaseNotes>Corrected Project/Repository URL in Package</PackageReleaseNotes>
+	  <PackageReleaseNotes>Added logic to merge duplicate event properties to prevent SQL exceptions relating to duplicate column creation</PackageReleaseNotes>
 	  <AssemblyName>Seq.Apps.SQLServerExporter</AssemblyName>
 	  <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>

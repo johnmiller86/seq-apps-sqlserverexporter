@@ -1,8 +1,8 @@
 ﻿using Seq.Apps.LogEvents;
 using System;
-using System.Linq;
-using System.Data.SqlClient;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace Seq.Apps.SQLServerExporter
 {
@@ -280,7 +280,20 @@ namespace Seq.Apps.SQLServerExporter
                     }
                     else
                     {
-                        colVals.Add(kvp.Key, kvp.Value.ToString());
+                        // Merge Duplicate Properties
+                        if (colVals.Select(cv => cv.Key).Contains(kvp.Key, StringComparer.CurrentCultureIgnoreCase))
+                        {
+                            // Get the Actual Dictionary Key
+                            var key = colVals.FirstOrDefault(cv => cv.Key.ToUpper().Equals(kvp.Key.ToUpper())).Key;
+
+                            // Merge the data into the value
+                            colVals[key] = !colVals[key].Contains("MERGED DATA =>") ? $"MERGED DATA => {key}: {colVals[key]}; {kvp.Key}: {kvp.Value}" : $"{colVals[key]}; {kvp.Key}: {kvp.Value}";
+                        }
+                        // Simply Add the Property
+                        else
+                        {
+                            colVals.Add(kvp.Key, kvp.Value.ToString());
+                        }
                     }
                 }
 
