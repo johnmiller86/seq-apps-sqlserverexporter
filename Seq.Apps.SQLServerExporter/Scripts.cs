@@ -29,8 +29,13 @@
             END";
 
         internal static string InsertEvent = @"
-            DECLARE @SQL VARCHAR(MAX) = 'INSERT INTO ' + QUOTENAME(@SchemaName) + '.' + QUOTENAME(@TableName) + '(' + @Columns + ') VALUES(' + @Values + ')';
-            EXEC(@SQL)";
+            DECLARE @params NVARCHAR(100) = '@S NVARCHAR(128), @T NVARCHAR(128), @C NVARCHAR(MAX), @V NVARCHAR(MAX)';
+            DECLARE @S NVARCHAR(128) = @SchemaName;
+            DECLARE @T NVARCHAR(128)= @TableName;
+            DECLARE @C NVARCHAR(MAX) = @Columns;
+            DECLARE @V NVARCHAR(MAX) = @Values;
+            DECLARE @SQL NVARCHAR(MAX) = 'INSERT INTO ' + QUOTENAME(@S) + '.' + QUOTENAME(@T) + '(' + @C + ') VALUES(' + @V + ')';
+            EXEC sp_executesql @SQL, @params, @S = @SchemaName, @T = @TableName, @C = @Columns, @V = @Values;";
 
         internal static string SelectAllColumns = @"
             SELECT COLUMN_NAME
