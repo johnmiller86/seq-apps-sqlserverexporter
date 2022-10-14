@@ -7,14 +7,14 @@
             EXEC(@SQL);";
 
         internal static string CreateSchema = @"
-            IF NOT EXISTS(SELECT 1 FROM sys.schemas WHERE name = @SchemaName)
+            IF NOT EXISTS(SELECT 1 FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = QUOTENAME(@SchemaName))
             BEGIN
 	            DECLARE @SQL VARCHAR(MAX) = 'CREATE SCHEMA ' + QUOTENAME(@SchemaName) + ' AUTHORIZATION [dbo]';
 	            EXEC(@SQL);
             END";
 
         internal static string CreateTable = @"
-            IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = @TableName)
+            IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = QUOTENAME(@SchemaName) AND TABLE_NAME = QUOTENAME(@TableName))
             BEGIN
 	            DECLARE @SQL VARCHAR(MAX) = '
 	            CREATE TABLE ' + QUOTENAME(@SchemaName) + '.' + QUOTENAME(@TableName) + ' (
