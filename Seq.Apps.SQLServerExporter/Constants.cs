@@ -20,6 +20,7 @@
 
         internal struct InitialColumns
         {
+            internal const string EventLogId = "EventLogId";
             internal const string SeqEventId = "SeqEventId";
             internal const string SeqEventIngestionTimestamp = "SeqEventIngestionTimestamp";
             internal const string SeqEventLocalTimestamp = "SeqEventLocalTimestamp";

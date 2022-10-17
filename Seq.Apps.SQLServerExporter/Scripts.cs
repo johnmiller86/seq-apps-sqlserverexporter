@@ -18,14 +18,25 @@
             BEGIN
 	            DECLARE @SQL VARCHAR(MAX) = '
 	            CREATE TABLE ' + QUOTENAME(@SchemaName) + '.' + QUOTENAME(@TableName) + ' (
-		            [Id] BIGINT PRIMARY KEY IDENTITY (1, 1),
+		            [EventLogId] BIGINT PRIMARY KEY IDENTITY (1, 1),
 		            [SeqEventId] NVARCHAR(50) NOT NULL,
 		            [SeqEventIngestionTimestamp] NVARCHAR(30) NOT NULL,
                     [SeqEventLocalTimestamp] NVARCHAR(30) NOT NULL,
                     [SeqEventLevel] NVARCHAR(15) NOT NULL,
                     [SeqEventMessage] NVARCHAR(MAX) NOT NULL
 	            )';
-				EXEC(@SQL);
+	            EXEC(@SQL);
+            END
+            ELSE
+            BEGIN
+                DECLARE @RenameSQL VARCHAR(MAX) = '
+	            -- Try and update to the new PK name
+	            IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = ''' + @SchemaName + ''' AND TABLE_NAME = ''' + @TableName + ''' AND COLUMN_NAME = ''EventLogId'') AND EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = ''' + @SchemaName + ''' AND TABLE_NAME = ''' + @TableName + ''' AND COLUMN_NAME = ''Id'')
+	            BEGIN
+		            -- Update Id column to EventLogId
+		            EXEC sp_rename ''' + QUOTENAME(@SchemaName) + '.' + QUOTENAME(@TableName) + '.Id'', ''EventLogId'', ''COLUMN''
+	            END';
+                EXEC(@RenameSQL);
             END";
 
         internal static string InsertEvent = @"
