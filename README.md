@@ -1,4 +1,4 @@
-# Seq.Apps.SQLServerExporter
+# Deprecated
 
 [![Build status](https://ci.appveyor.com/api/projects/status/2cwq8web76rwcbnq?svg=true)](https://ci.appveyor.com/project/johnmiller86/seq-apps-sqlserverexporter) 
 [![GitHub release](https://img.shields.io/github/release/johnmiller86/seq-apps-sqlserverexporter.svg)](https://github.com/johnmiller86/seq-apps-sqlserverexporter/releases)
