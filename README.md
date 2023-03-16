@@ -6,7 +6,7 @@
 
 A Seq exporter that inserts events into an MSSQL database.
 
-This repository is no longer being maintained.  With larger scale Seq instances, it the constantly growing column structure lacked in performance and became too much to maintain.  The new repository for this project is [Seq.App.SQLServerExporter]([https://github.com/johnmiller86](https://github.com/johnmiller86/Seq.App.SQLServerExporter)
+This repository is no longer being maintained.  With larger scale Seq instances, it the constantly growing column structure lacked in performance and became too much to maintain.  The new repository for this project is [Seq.App.SQLServerExporter](https://github.com/johnmiller86/Seq.App.SQLServerExporter)
 
 
 ## Getting started
